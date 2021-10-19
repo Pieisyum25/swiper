@@ -4,4 +4,5 @@
     <dimen name="card_corner_radius">20dp</dimen>
     <dimen name="card_elevation">20dp</dimen>
     <dimen name="card_margin">20dp</dimen>
+    <dimen name="card_contents_margin">20dp</dimen>
 </resources>
