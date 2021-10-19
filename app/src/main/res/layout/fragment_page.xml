@@ -1,36 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/page_card"
+    android:id="@+id/page_layout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:cardCornerRadius="@dimen/card_corner_radius"
-    app:cardElevation="@dimen/card_elevation"
-    app:cardUseCompatPadding="true"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent">
+    android:layout_height="match_parent"
+    app:layoutDescription="@xml/fragment_page_scene">
 
-    <LinearLayout
+    <androidx.cardview.widget.CardView
+        android:id="@+id/page_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_margin="@dimen/card_contents_margin">
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        app:cardCornerRadius="@dimen/card_corner_radius"
+        app:cardElevation="@dimen/card_elevation"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/page_title"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/card_contents_margin"
-            tools:text="Page 1" />
+            android:layout_margin="@dimen/card_contents_margin"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/page_body"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/filler" />
-    </LinearLayout>
+            <TextView
+                android:id="@+id/page_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/card_contents_margin"
+                tools:text="Page 1" />
 
-</androidx.cardview.widget.CardView>
+            <TextView
+                android:id="@+id/page_body"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/filler" />
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.motion.widget.MotionLayout>
