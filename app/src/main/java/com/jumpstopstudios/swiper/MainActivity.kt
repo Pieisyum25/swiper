@@ -22,7 +22,8 @@ class MainActivity : AppCompatActivity(){
         // Infinite loop:
         viewPager.adapter = InfinitePagerAdapter(this)
         viewPager.setCurrentItem(PADDING_PAGE_COUNT, false)
-        viewPager.registerOnPageChangeCallback(SleekPageChangeCallback(viewPager))
+        val pageChangeCallback = SleekPageChangeCallback(viewPager)
+        viewPager.registerOnPageChangeCallback(pageChangeCallback)
 
         // Show preview of page on either side:
         // Adapted from https://stackoverflow.com/a/58088398
@@ -33,7 +34,7 @@ class MainActivity : AppCompatActivity(){
             pageTranslationX = getDimension(R.dimen.viewpager_next_item_visible_amount)
             + getDimension(R.dimen.viewpager_current_item_horizontal_margin)
         }
-        viewPager.setPageTransformer(SleekPageTransformer(pageTranslationX))
+        viewPager.setPageTransformer(SleekPageTransformer(pageTranslationX, pageChangeCallback))
         val itemDecoration = HorizontalMarginItemDecoration(this, R.dimen.viewpager_current_item_horizontal_margin)
         viewPager.addItemDecoration(itemDecoration)
     }
