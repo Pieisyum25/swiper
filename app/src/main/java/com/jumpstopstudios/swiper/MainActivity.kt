@@ -22,17 +22,7 @@ class MainActivity : AppCompatActivity(){
         // Infinite loop:
         viewPager.adapter = InfinitePagerAdapter(this)
         viewPager.setCurrentItem(PADDING_PAGE_COUNT, false)
-        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-                if (positionOffset <= 0.01f) {
-                    when {
-                        position < PADDING_PAGE_COUNT -> viewPager.setCurrentItem(position + PAGE_COUNT, false)
-                        position >= PAGE_COUNT + PADDING_PAGE_COUNT ->viewPager.setCurrentItem(position - PAGE_COUNT, false)
-                    }
-                }
-                super.onPageScrolled(position, positionOffset, positionOffsetPixels)
-            }
-        })
+        viewPager.registerOnPageChangeCallback(SleekPageChangeCallback(viewPager))
 
         // Show preview of page on either side:
         // Adapted from https://stackoverflow.com/a/58088398
@@ -43,14 +33,7 @@ class MainActivity : AppCompatActivity(){
             pageTranslationX = getDimension(R.dimen.viewpager_next_item_visible_amount)
             + getDimension(R.dimen.viewpager_current_item_horizontal_margin)
         }
-        val pageTransformer = ViewPager2.PageTransformer { page: View, position: Float ->
-            page.translationX = -pageTranslationX * position
-            val scale = 1 - (0.0008f * pageTranslationX * kotlin.math.abs(position))
-            page.scaleX = scale
-            page.scaleY = scale
-            page.alpha = 0.5f + (1 - kotlin.math.abs(position))
-        }
-        viewPager.setPageTransformer(pageTransformer)
+        viewPager.setPageTransformer(SleekPageTransformer(pageTranslationX))
         val itemDecoration = HorizontalMarginItemDecoration(this, R.dimen.viewpager_current_item_horizontal_margin)
         viewPager.addItemDecoration(itemDecoration)
     }
