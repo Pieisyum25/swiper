@@ -1,7 +1,6 @@
 package com.jumpstopstudios.swiper
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
@@ -49,6 +48,7 @@ class MainActivity : AppCompatActivity(){
             val scale = 1 - (0.0008f * pageTranslationX * kotlin.math.abs(position))
             page.scaleX = scale
             page.scaleY = scale
+            page.alpha = 0.5f + (1 - kotlin.math.abs(position))
         }
         viewPager.setPageTransformer(pageTransformer)
         val itemDecoration = HorizontalMarginItemDecoration(this, R.dimen.viewpager_current_item_horizontal_margin)
