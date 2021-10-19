@@ -17,8 +17,9 @@ class SlidePagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapt
 
 /**
  * Number of fake pages on each end (for infinite looping).
+ * Needs to be at least 2 to work with side previews.
  */
-const val PADDING_PAGE_COUNT = 1
+const val PADDING_PAGE_COUNT = 2
 
 /**
  * Infinite loop pager adapter.

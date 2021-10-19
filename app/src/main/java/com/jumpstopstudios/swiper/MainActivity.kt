@@ -1,11 +1,8 @@
 package com.jumpstopstudios.swiper
 
 import android.os.Bundle
-import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
-import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 
 class MainActivity : AppCompatActivity(){
@@ -36,6 +33,26 @@ class MainActivity : AppCompatActivity(){
                 super.onPageScrolled(position, positionOffset, positionOffsetPixels)
             }
         })
+
+        // Show preview of page on either side:
+        // Adapted from https://stackoverflow.com/a/58088398
+        // Also requires dimensions and horizontal margin item decoration.
+
+        var pageTranslationX: Float
+        with (resources){
+            pageTranslationX = getDimension(R.dimen.viewpager_next_item_visible_amount)
+            + getDimension(R.dimen.viewpager_current_item_horizontal_margin)
+        }
+        val pageTransformer = ViewPager2.PageTransformer { page: View, position: Float ->
+            page.translationX = -pageTranslationX * position
+            val scale = 1 - (0.0008f * pageTranslationX * kotlin.math.abs(position))
+            page.scaleX = scale
+            page.scaleY = scale
+            page.alpha = 0.5f + (1 - kotlin.math.abs(position))
+        }
+        viewPager.setPageTransformer(pageTransformer)
+        val itemDecoration = HorizontalMarginItemDecoration(this, R.dimen.viewpager_current_item_horizontal_margin)
+        viewPager.addItemDecoration(itemDecoration)
     }
 
     override fun onBackPressed() {

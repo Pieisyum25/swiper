@@ -5,4 +5,8 @@
     <dimen name="card_elevation">20dp</dimen>
     <dimen name="card_margin">20dp</dimen>
     <dimen name="card_contents_margin">20dp</dimen>
+
+    <!-- For side previews: -->
+    <dimen name="viewpager_next_item_visible_amount">150dp</dimen>
+    <dimen name="viewpager_current_item_horizontal_margin">42dp</dimen>
 </resources>
