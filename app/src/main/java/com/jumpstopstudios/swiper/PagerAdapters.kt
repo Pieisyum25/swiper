@@ -15,17 +15,25 @@ class SlidePagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapt
     override fun createFragment(position: Int) = PageFragment(position)
 }
 
+/**
+ * Number of fake pages on each end (for infinite looping).
+ */
 const val PADDING_PAGE_COUNT = 1
 
+/**
+ * Infinite loop pager adapter.
+ * Scrolling appears endless.
+ */
 class InfinitePagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity){
     override fun getItemCount() = PAGE_COUNT + (PADDING_PAGE_COUNT * 2)
 
     override fun createFragment(position: Int): Fragment {
-        var adjustedPosition = when {
-            position < PADDING_PAGE_COUNT -> position + PAGE_COUNT - 1
-            position >= PAGE_COUNT + PADDING_PAGE_COUNT -> position - PAGE_COUNT - 1
-            else -> position - 1
+        var adjustedPosition = position
+        when {
+            position < PADDING_PAGE_COUNT -> adjustedPosition += PAGE_COUNT
+            position >= PAGE_COUNT + PADDING_PAGE_COUNT -> adjustedPosition -= PAGE_COUNT
         }
+        adjustedPosition -= PADDING_PAGE_COUNT
         return PageFragment(adjustedPosition)
     }
 }

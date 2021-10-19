@@ -17,14 +17,14 @@ class MainActivity : AppCompatActivity(){
         setContentView(R.layout.activity_main)
 
         viewPager = findViewById(R.id.view_pager)
-        viewPager.offscreenPageLimit = 3
+        if (PADDING_PAGE_COUNT > 1) viewPager.offscreenPageLimit = PADDING_PAGE_COUNT - 1
 
         // Basic:
         //viewPager.adapter = SlidePagerAdapter(this)
 
         // Infinite loop:
         viewPager.adapter = InfinitePagerAdapter(this)
-        viewPager.setCurrentItem(1, false)
+        viewPager.setCurrentItem(PADDING_PAGE_COUNT, false)
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
                 if (positionOffset <= 0.01f) {
@@ -39,7 +39,8 @@ class MainActivity : AppCompatActivity(){
     }
 
     override fun onBackPressed() {
-        if (viewPager.currentItem == 0) super.onBackPressed()
-        else viewPager.currentItem--
+        if (viewPager.currentItem == PADDING_PAGE_COUNT) super.onBackPressed()
+        //else viewPager.currentItem-- // doesn't make sense in infinite loop
+        else viewPager.currentItem = PADDING_PAGE_COUNT
     }
 }
