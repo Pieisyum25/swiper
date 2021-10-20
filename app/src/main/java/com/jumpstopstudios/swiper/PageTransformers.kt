@@ -63,7 +63,7 @@ import kotlin.math.abs
  */
 class SleekPageTransformer(
     private val pageChangeCallback: SleekPageChangeCallback,
-    private val pageTranslationFactorX: Double = 0.5,
+    private val pageTranslationFactorX: Double = 0.45,
     private val pageTranslationFactorY: Double = 0.15,
     private val pageTranslationYSymmetrical: Boolean = true,
     private val pageScaleFactor: Double = 0.75,
