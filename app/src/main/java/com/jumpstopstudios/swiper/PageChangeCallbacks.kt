@@ -1,6 +1,5 @@
 package com.jumpstopstudios.swiper
 
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import kotlin.properties.Delegates
 
@@ -23,7 +22,8 @@ class SleekPageChangeCallback(private val viewPager: ViewPager2) : ViewPager2.On
             }
         }
 
-        // Rotating:
+        // Determine swipe direction and progress.
+        // (For rotation animation)
         goingLeft = prevOffset > positionOffset
         prevOffset = positionOffset
         progress = when (position) {
