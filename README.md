@@ -5,6 +5,7 @@ An example of how to use ViewPager2 in cool ways with very little code.
 - Scroll endlessly (last page wraps to start seamlessly)
 - Plenty of customization options: page width, multiple pages onscreen, scaling, translations, fading etc.
 - Pages animate during swipes
+- Works in night-mode and both screen orientations.
 
 Screenshots:
 <p float="left">
