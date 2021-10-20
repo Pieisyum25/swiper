@@ -12,7 +12,7 @@ const val PAGE_COUNT = 5
  */
 class SlidePagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity){
     override fun getItemCount() = PAGE_COUNT
-    override fun createFragment(position: Int) = PageFragment(position)
+    override fun createFragment(position: Int) = PageFragment.newInstance(position)
 }
 
 /**
@@ -35,6 +35,6 @@ class InfinitePagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAd
             position >= PAGE_COUNT + PADDING_PAGE_COUNT -> adjustedPosition -= PAGE_COUNT
         }
         adjustedPosition -= PADDING_PAGE_COUNT
-        return PageFragment(adjustedPosition)
+        return PageFragment.newInstance(adjustedPosition)
     }
 }
